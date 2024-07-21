@@ -1,0 +1,25 @@
+button{
+  padding: 10px;
+  border-radius: 5px;
+  border: none;
+  background-color: hsl(213, 100%, 70%);
+}
+
+.main-div{
+  text-align: center;
+  padding: 5px;
+}
+
+.main-div p{
+  font-size: x-large;
+}
+
+.main-div button{
+  display: inline-block;
+  text-align: center;
+  transition: 0.5s;
+}
+
+.main-div button:hover{
+  scale: 1.1;
+}
