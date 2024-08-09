@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 function Contact() {
-  const password = 'swordfish';
+  const password = 'ramepassword';
   const [authorized, setAuthorized] = useState(false);
 
   function handleSubmit(e) {
