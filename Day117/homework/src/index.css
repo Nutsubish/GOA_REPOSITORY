@@ -1,0 +1,33 @@
+#Main-p{
+  display: flex;
+  justify-content: center;
+  font-size: 30px;
+  color: red;
+}
+#flex-div{
+  text-align: center;
+  gap: 20px;
+}
+
+.Main-input{
+  text-align: center;
+  padding: 10px;
+}
+
+.Btn{
+  padding: 10px;
+  border: none;
+  margin: 5px;
+  background-color: hsl(201, 96%, 48%);
+  border-radius: 5px;
+  color: white;
+  transition: 0.6s;
+}
+
+.Btn:hover{
+  scale: 1.1;
+}
+
+body{
+  background-color: black;
+}
