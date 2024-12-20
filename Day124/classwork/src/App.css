@@ -1,0 +1,12 @@
+body{
+    background-color: green;
+    display: flex;
+    justify-content: center;
+
+}
+
+#photos{
+    border-radius: 50%;
+    border: 5px solid black;
+}
+
