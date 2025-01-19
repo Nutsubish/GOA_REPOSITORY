@@ -5,6 +5,8 @@ export default function App() {
   const [students, setStudents] = useState([]);
   const [accounts, setAccounts] = useState([]);
   const [account, setAccount] = useState(null);
+  const [editingIndex, setEditingIndex] = useState(null);
+  const [newName, setNewName] = useState("");
 
   // Sync account to localStorage
   useEffect(() => {
@@ -64,7 +66,6 @@ export default function App() {
     alert("Logged out successfully!");
   };
 
-  // students managment
   const addStudent = (e) => {
     e.preventDefault();
     const student = {
@@ -80,6 +81,26 @@ export default function App() {
     const filteredStudents = students.filter((_, i) => i !== index);
     setStudents(filteredStudents);
   };
+
+  const handleEditClick = (index) => {
+    setEditingIndex(index);
+    setNewName(students[index].name);
+  };
+
+  const handleNameChange = (e) => {
+    setNewName(e.target.value);
+  };
+
+  const handleSubmitNewName = () => {
+    if (editingIndex !== null) {
+      const updatedStudents = [...students];
+      updatedStudents[editingIndex].name = newName;
+      setStudents(updatedStudents);
+      setEditingIndex(null);
+      setNewName("");
+    }
+  };
+
   return (
     <main>
       {account === null ? (
@@ -88,7 +109,6 @@ export default function App() {
             <h1>Registration</h1>
             <input type="email" name="email" required />
             <input type="password" name="pass" required />
-            <input type="text" name="name" required />
             <button>Submit</button>
           </form>
 
@@ -96,7 +116,6 @@ export default function App() {
             <h1>Login</h1>
             <input type="email" name="email" required />
             <input type="password" name="pass" required />
-            <input type="text" name="name" required />
             <button>Submit</button>
           </form>
         </section>
@@ -130,24 +149,42 @@ export default function App() {
           </div>
 
           <table>
-            <tr>
-              <th>Firstname</th>
-              <th>Lastname</th>
-              <th>Age</th>
-            </tr>
-            {students.map((student, index) => {
-              return (
+            <thead>
+              <tr>
+                <th>Firstname</th>
+                <th>Lastname</th>
+                <th>Age</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              {students.map((student, index) => (
                 <tr key={index}>
                   <td>{student.name}</td>
                   <td>{student.lastname}</td>
                   <td>{student.age}</td>
                   <td>
                     <button onClick={() => deleteStudent(index)}>Delete</button>
+                    <button onClick={() => handleEditClick(index)}>
+                      Change Student Name
+                    </button>
                   </td>
                 </tr>
-              );
-            })}
+              ))}
+            </tbody>
           </table>
+
+          {editingIndex !== null && (
+            <div>
+              <input
+                type="text"
+                value={newName}
+                onChange={handleNameChange}
+                placeholder="Enter new name"
+              />
+              <button onClick={handleSubmitNewName}>Submit New Name</button>
+            </div>
+          )}
         </section>
       )}
     </main>
